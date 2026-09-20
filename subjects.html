@@ -1,0 +1,82 @@
+<div class="subject" data-name="çyzuw">
+
+            <div class="icon">📐</div>
+
+            <h2>Çyzuw</h2>
+
+            <p>
+                Çyzgylar, ölçegler we tehniki şekiller.
+            </p>
+
+            <button onclick="openSubject('cyzuw')">
+                Açmak
+            </button>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="empty" id="empty">
+        🔎 Bu ada laýyk ders tapylmady.
+    </div>
+
+</main>
+
+
+<footer>
+    © 2026 <strong>Okuwçy</strong> — Türkmenistan okuwçylary üçin.
+</footer>
+
+
+<script>
+
+function searchSubjects() {
+
+    const query =
+        document.getElementById("searchInput")
+        .value
+        .toLowerCase()
+        .trim();
+
+    const subjects =
+        document.querySelectorAll(".subject");
+
+    let visible = 0;
+
+    subjects.forEach(subject => {
+
+        const name =
+            subject.dataset.name.toLowerCase();
+
+        if (name.includes(query)) {
+
+            subject.style.display = "block";
+            visible++;
+
+        } else {
+
+            subject.style.display = "none";
+
+        }
+
+    });
+
+    document.getElementById("empty").style.display =
+        visible === 0 ? "block" : "none";
+}
+
+
+function openSubject(subject) {
+
+    window.location.href =
+        "books.html?subject=" +
+        encodeURIComponent(subject);
+
+}
+
+</script>
+
+</body>
+</html>
