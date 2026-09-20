@@ -1,0 +1,126 @@
+<div class="box">
+
+        <label for="subject">
+            📚 Ders
+        </label>
+
+        <select id="subject">
+
+            <option value="Matematika">
+                Matematika
+            </option>
+
+            <option value="Fizika">
+                Fizika
+            </option>
+
+            <option value="Himiýa">
+                Himiýa
+            </option>
+
+            <option value="Biologiýa">
+                Biologiýa
+            </option>
+
+            <option value="Türkmen dili">
+                Türkmen dili
+            </option>
+
+            <option value="Edebiýat">
+                Edebiýat
+            </option>
+
+            <option value="Taryh">
+                Taryh
+            </option>
+
+            <option value="Informatika">
+                Informatika
+            </option>
+
+        </select>
+
+
+        <label for="question">
+            ✏️ Soragyň
+        </label>
+
+        <textarea
+            id="question"
+            placeholder="Öý işiňi ýa-da düşünmeýän soragyňy şu ýere ýaz..."
+        ></textarea>
+
+
+        <button onclick="getHelp()">
+            🔍 Kömek al
+        </button>
+
+
+        <div id="answer" class="answer">
+
+            <h2>💡 Kömek</h2>
+
+            <p id="answerText"></p>
+
+        </div>
+
+
+        <div class="notice">
+            Okuwçy jogaby diňe görkezmek bilen çäklenmän,
+            temany düşünmäge hem kömek eder.
+        </div>
+
+    </div>
+
+</main>
+
+
+<footer>
+    © 2026 Okuwçy — Türkmenistan okuwçylary üçin.
+</footer>
+
+
+<script>
+
+function getHelp() {
+
+    const subject =
+        document.getElementById("subject").value;
+
+    const question =
+        document.getElementById("question").value.trim();
+
+    const answer =
+        document.getElementById("answer");
+
+    const answerText =
+        document.getElementById("answerText");
+
+
+    if (question === "") {
+
+        alert(
+            "Ilki bilen soragyňyzy ýazyň."
+        );
+
+        return;
+    }
+
+
+    answer.style.display = "block";
+
+
+    answerText.innerHTML =
+        "<strong>Ders:</strong> " +
+        subject +
+        "<br><br>" +
+        "Soragyňyz kabul edildi. " +
+        "AI kömekçisini birikdirenimizden soň " +
+        "bu ýerde soragyňyza ädimme-ädim düşündiriş we jogap görkeziler.";
+
+}
+
+</script>
+
+</body>
+</html>
