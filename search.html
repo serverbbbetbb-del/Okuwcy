@@ -1,0 +1,130 @@
+},
+    {
+      title: "Fizika",
+      type: "Ders",
+      description: "Fizika boýunça okuw materiallary.",
+      link: "books.html?subject=Fizika"
+    },
+    {
+      title: "Himiýa",
+      type: "Ders",
+      description: "Himiýa boýunça okuw materiallary.",
+      link: "books.html?subject=Himiýa"
+    },
+    {
+      title: "Biologiýa",
+      type: "Ders",
+      description: "Biologiýa boýunça okuw materiallary.",
+      link: "books.html?subject=Biologiýa"
+    },
+    {
+      title: "Türkmen dili",
+      type: "Ders",
+      description: "Türkmen dili boýunça okuw materiallary.",
+      link: "books.html?subject=Türkmen dili"
+    },
+    {
+      title: "Türkmenistanyň taryhy",
+      type: "Kitap",
+      description: "Türkmenistanyň taryhy boýunça okuw materialy.",
+      link: "reader.html?book=taryh"
+    },
+    {
+      title: "Matematika kitaby",
+      type: "Kitap",
+      description: "Matematika boýunça okuw kitaby.",
+      link: "reader.html?book=matematika"
+    },
+    {
+      title: "Fizika kitaby",
+      type: "Kitap",
+      description: "Fizika boýunça okuw kitaby.",
+      link: "reader.html?book=fizika"
+    },
+    {
+      title: "Himiýa kitaby",
+      type: "Kitap",
+      description: "Himiýa boýunça okuw kitaby.",
+      link: "reader.html?book=himiya"
+    },
+    {
+      title: "Biologiýa kitaby",
+      type: "Kitap",
+      description: "Biologiýa boýunça okuw kitaby.",
+      link: "reader.html?book=biologiya"
+    },
+    {
+      title: "Türkmen dili kitaby",
+      type: "Kitap",
+      description: "Türkmen dili boýunça okuw kitaby.",
+      link: "reader.html?book=turkmen-dili"
+    }
+  ];
+
+  function getQuery() {
+    const params = new URLSearchParams(window.location.search);
+    return params.get("q") || "";
+  }
+
+  function performSearch() {
+    const query = document.getElementById("searchInput").value.trim();
+
+    if (query) {
+      window.location.href =
+        "search.html?q=" + encodeURIComponent(query);
+    }
+  }
+
+  function showResults() {
+    const query = getQuery().toLowerCase();
+
+    document.getElementById("searchInput").value = getQuery();
+
+    const results = data.filter(item =>
+      item.title.toLowerCase().includes(query) ||
+      item.type.toLowerCase().includes(query) ||
+      item.description.toLowerCase().includes(query)
+    );
+
+    const container = document.getElementById("results");
+    const count = document.getElementById("resultCount");
+
+    if (!query) {
+      count.textContent = "Gözleg üçin ýokardaky meýdana söz ýazyň.";
+      container.innerHTML = "";
+      return;
+    }
+
+    count.textContent =
+      results.length + " netije tapyldy.";
+
+    if (results.length === 0) {
+      container.innerHTML = 
+        <div class="empty">
+          <h3>Netije tapylmady</h3>
+          <p>Başga söz ýa-da ders ady bilen gözläp görüň.</p>
+        </div>
+      ;
+      return;
+    }
+
+    container.innerHTML = results.map(item => 
+      <div class="result">
+        <h3>${item.title}</h3>
+        <p><strong>${item.type}</strong></p>
+        <p>${item.description}</p>
+        <a href="${item.link}">Aç</a>
+      </div>
+    ).join("");
+  }
+
+  document.getElementById("searchInput").addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+      performSearch();
+    }
+  });
+
+  showResults();
+
+</script></body>
+</html>
