@@ -1,0 +1,173 @@
+<p>
+                        Ösümlikler, haýwanlar we adam organizmi
+                        biologiýanyň esasy temalarynyň biridir.
+                    </p>
+                
+            }
+        ]
+    },
+
+
+    "turkmen-dili": {
+        title: "Türkmen dili",
+        subject: "Türkmen dili",
+        pages: [
+            {
+                title: "Türkmen dili",
+                text: 
+                    <p>
+                        Türkmen dili türkmen halkynyň milli
+                        dilidir.
+                    </p>
+
+                    <p>
+                        Bu kitapda sözler, sözlemler,
+                        grammatika we ýazuw düzgünleri öwrenilýär.
+                    </p>
+                
+            }
+        ]
+    },
+
+
+    taryh: {
+        title: "Türkmenistanyň taryhy",
+        subject: "Taryh",
+        pages: [
+            {
+                title: "Taryh",
+                text: 
+                    <p>
+                        Taryh geçmişde bolup geçen wakalary
+                        öwrenýän ylymdyr.
+                    </p>
+
+                    <p>
+                        Türkmenistanyň gadymy taryhy baý medeni
+                        mirasa eýedir.
+                    </p>
+                `
+            }
+        ]
+    }
+
+};
+
+
+let currentPage = 0;
+let fontSize = 19;
+
+
+const params =
+    new URLSearchParams(window.location.search);
+
+const bookId =
+    params.get("book") || "matematika";
+
+
+const book =
+    books[bookId] || books.matematika;
+
+
+document.getElementById("bookTitle").textContent =
+    book.title;
+
+document.getElementById("bookSubject").textContent =
+    book.subject;
+
+
+function showPage() {
+
+    const page =
+        book.pages[currentPage];
+
+    document.getElementById("chapterTitle")
+        .textContent = page.title;
+
+    document.getElementById("bookText")
+        .innerHTML = page.text;
+
+    document.getElementById("pageNumber")
+        .textContent =
+        (currentPage + 1) +
+        " / " +
+        book.pages.length;
+
+    document.getElementById("previousButton")
+        .disabled = currentPage === 0;
+
+    document.getElementById("nextButton")
+        .disabled =
+        currentPage === book.pages.length - 1;
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+
+function nextPage() {
+
+    if (currentPage < book.pages.length - 1) {
+        currentPage++;
+        showPage();
+    }
+
+}
+
+
+function previousPage() {
+
+    if (currentPage > 0) {
+        currentPage--;
+        showPage();
+    }
+
+}
+
+
+function changeFont(amount) {
+
+    fontSize += amount;
+
+    if (fontSize < 14)
+        fontSize = 14;
+
+    if (fontSize > 28)
+        fontSize = 28;
+
+    document.querySelector(".book-page")
+        .style.fontSize = fontSize + "px";
+}
+
+
+function resetFont() {
+
+    fontSize = 19;
+
+    document.querySelector(".book-page")
+        .style.fontSize = "19px";
+}
+
+
+function toggleTheme() {
+
+    document.body.classList.toggle("light");
+
+}
+
+
+function goBooks() {
+
+    window.location.href = "books.html";
+
+}
+
+
+showPage();
+
+</script>
+
+</body>
+</html>
